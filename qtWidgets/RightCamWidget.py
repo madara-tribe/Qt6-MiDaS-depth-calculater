@@ -1,6 +1,4 @@
-import cv2, os
-import numpy as np
-import time
+import cv2
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout
 from PySide6.QtCore import QSize
 

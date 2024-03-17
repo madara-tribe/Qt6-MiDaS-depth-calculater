@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGraphicsView, 
 from PySide6.QtCore import QSize, QTimer
 from PySide6.QtGui import QImage, QPixmap
 import time
-import os, sys, cv2
+import cv2
 import numpy as np
 
 class LeftWidget(QWidget):
