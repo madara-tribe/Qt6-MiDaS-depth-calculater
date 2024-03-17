@@ -1,18 +1,17 @@
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGraphicsView, QLabel, QSizePolicy, QSpacerItem
+from PySide6.QtCore import QSize, QTimer
+from PySide6.QtGui import QImage, QPixmap
 import time
 import os, sys, cv2
 import numpy as np
 
 class LeftWidget(QWidget):
-    def __init__(self, parent=None, cap = None):
+    def __init__(self, parent, opt, cap = None, ):
         super(LeftWidget, self).__init__(parent)
 
         self.layout = QVBoxLayout()
-        
         self.cap = cap
-        self.video_size = QSize(200, 200)
+        self.video_size = QSize(opt.Leftwidget_size, opt.Leftwidget_size)
         self.TIMEOUT = 1
         self.cur_fps = 0
         self.old_timestamp = time.time()
