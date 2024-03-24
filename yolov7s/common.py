@@ -1,7 +1,7 @@
 import cv2
 import random
 import numpy as np
-
+from .dist_calcurator import calcurate_distance
 TARGET_CANDIDATE_CLS = ['car', 'bus', 'truck']
 
 names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
@@ -46,8 +46,7 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleu
 
 def preprocess(img):
     # Scale input pixel values to 0 to 1
-    image = img.transpose((2, 0, 1))
-    image = np.expand_dims(image, 0)
+    image = np.expand_dims(img.transpose((2, 0, 1)), 0)
     image = np.ascontiguousarray(image)
     return image.astype(np.float32) / 255
 
@@ -58,7 +57,7 @@ def onnx_inference(session, input_tensor):
     outputs = session.run(output_names, inp)[0]
     return outputs
 
-def post_process(outputs, ori_images, ratio, dwdh, conf_thres):
+def post_process(outputs, ori_images, ratio, dwdh, conf_thres, depth_midas):
     mid_x, mid_y = 0, 0
     for i, (batch_id, x0, y0, x1, y1, cls_id, score) in enumerate(outputs):
         image = ori_images[int(batch_id)]
@@ -75,18 +74,19 @@ def post_process(outputs, ori_images, ratio, dwdh, conf_thres):
             continue
         color = colors[name]
         name += ' '+str(score)
-        cv2.rectangle(image, box[:2], box[2:], color, 2)
-        cv2.putText(image, name, (box[0], box[1] - 2),cv2.FONT_HERSHEY_SIMPLEX,0.75,[225, 255, 255],thickness=2)
         mid_x = (box[2:][0]+box[:2][0])/2 # w+x/2
         mid_y = (box[2:][1]+box[:2][1])/2 # h+y/2
-        cv2.circle(image, (int(mid_x), int(mid_y)), 15, (255, 255, 255), thickness=-1)
+        target_dist = calcurate_distance(image, depth_midas, mid_x, mid_y)
+        # cv2.rectangle(image, box[:2], box[2:], color, 2)
+        cv2.putText(image, str(target_dist)+'M', (box[0], box[1] - 2),cv2.FONT_HERSHEY_SIMPLEX,0.75,[225, 255, 255],thickness=2)
+        cv2.circle(image, (int(mid_x), int(mid_y)), 5, (255, 255, 255), thickness=-1)
     return ori_images, mid_x, mid_y
 
 
-def obdetect_inference(frame, session, new_shape, conf_thres):
+def obdetect_inference(frame, depth_midas, session, new_shape, conf_thres):
     ori_images = [frame.copy()]
     resized_image, ratio, dwdh = letterbox(frame, new_shape=new_shape, auto=False)
     input_tensor = preprocess(resized_image)
     outputs = onnx_inference(session, input_tensor)
-    pred_output, coordinate_x, coordinate_y = post_process(outputs, ori_images, ratio, dwdh, conf_thres)
+    pred_output, coordinate_x, coordinate_y = post_process(outputs, ori_images, ratio, dwdh, conf_thres, depth_midas)
     return pred_output[0], coordinate_x, coordinate_y

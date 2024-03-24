@@ -1,13 +1,15 @@
 import numpy as np
-from scipy.interpolate import RectBivariateSpline
+from enum import Enum
 
-
-def depth_to_distance(depth_value,depth_scale):
-    return 1.0 / (depth_value * depth_scale)
-  
-def calcurate_depth_value(output_norm):
-    h, w = output_norm.shape
-    x_grid, y_grid = np.arange(w), np.arange(h)
-    # Create a spline object using the output_norm array
-    return RectBivariateSpline(y_grid, x_grid, output_norm)
+class DistConst(Enum):
+    CriteriaX = 866
+    CriteriaY = 400
+    RealLenth = 5 # m
     
+def calcurate_distance(ori_images, depth_midas, mid_x, mid_y):
+    #oriH, oriW, _ = ori_images.shape
+    # print("oriH, oriW",oriH, oriW) 500 1732
+    mid_z = depth_midas[int(mid_y)][int(mid_x)]
+    cri_z = depth_midas[DistConst.CriteriaY.value][DistConst.CriteriaX.value]
+    target_dist = (DistConst.RealLenth.value * mid_z) / cri_z
+    return np.round(target_dist, decimals=2)

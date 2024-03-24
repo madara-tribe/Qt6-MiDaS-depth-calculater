@@ -5,10 +5,8 @@ import cv2
 import numpy as np
 import onnxruntime
 from yolov7s.common import obdetect_inference
-from yolov7s.dist_calcurator import depth_to_distance, calcurate_depth_value
 from midas.midas_utils import call_transform, midas_onnx_prediction
 
-depth_scale = 1.0
 
 def get_cap(opt):
     cap = cv2.VideoCapture(opt.vid_path)
@@ -21,14 +19,12 @@ def get_cap(opt):
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out_frame = cv2.VideoWriter(opt.output_file+"_onnx.mp4", fourcc, fps, (frame_width, frame_height), isColor=False)
     return cap, out_frame, frame_width, frame_height
-    
 
-def precise_dist(ob_output, spline, mid_x, mid_y, px=20, py=50, title="Depth in unit: "):
-    depth_mid_filt = spline(mid_x, mid_y)
-    depth_mid_filt = depth_to_distance(depth_mid_filt, depth_scale)
-    cv2.putText(ob_output, title + str(
-        np.format_float_positional(depth_mid_filt*255, precision=3)), (px, py), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
-    return ob_output, depth_mid_filt
+
+def precise_dist(ob_output, depth_midas, mid_x, mid_y, px=20, py=50, title="Depth in unit: "):
+    #depth_mid_filt = depth_midas[int(mid_y)][int(mid_x)]
+    cv2.putText(ob_output, title + str(500)+str(mid_x)+str(mid_y), (px, py), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+    return ob_output
     
 def main(opt):
     # obdetect
@@ -52,23 +48,17 @@ def main(opt):
         if not ret:
             break
         start = time.time()
-        # object detectioon inference
-        ob_output, mid_x, mid_y = obdetect_inference(frame, session, new_shape, conf_thres)
-        
         # midas inference
         depth_midas = midas_onnx_prediction(frame, transform, midas_onnx_model, net_h, net_w)
         depth_midas = cv2.resize(depth_midas, (frame_width, frame_height))
         
+        # object detectioon inference
+        ob_output, mid_x, mid_y = obdetect_inference(frame, depth_midas, session, new_shape, conf_thres)
         print(time.time()-start)
         
         # Create a spline object using the output_norm array
-        spline = calcurate_depth_value(depth_midas)
-        ob_output, target_dist = precise_dist(ob_output, spline, mid_x, mid_y, title="Depth in unit: ")
-        ob_output, closet_dist = precise_dist(ob_output, spline, mid_x=1200, mid_y=600, px=1000, py=500, title="Difine: ")
-        if closet_dist < target_dist:
-            cv2.imshow("Detected Objects", depth_midas)
-        else:
-            cv2.putText(ob_output, 'Miscalculated', (1000, 600), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
+        ob_output = precise_dist(ob_output, depth_midas, mid_x=866, mid_y=400, px=866, py=400, title="Difine: ")
+        cv2.imshow("Detected Objects", ob_output)
         if cv2.waitKey(30) == 27:
             break
     out_format.release()
