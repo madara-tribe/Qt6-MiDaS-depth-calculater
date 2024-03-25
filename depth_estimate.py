@@ -21,14 +21,25 @@ def get_cap(opt):
     return cap, out_frame, frame_width, frame_height
 
 
-def precise_dist(ob_output, depth_midas, mid_x, mid_y, px=20, py=50, title="Depth in unit: "):
-    #depth_mid_filt = depth_midas[int(mid_y)][int(mid_x)]
-    cv2.putText(ob_output, title + str(500)+str(mid_x)+str(mid_y), (px, py), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+def qt6_onnx_prepare(opt):
+    cuda = False if opt.cpu=='True' else True
+    providers = ['CUDAExecutionProvider', 'CPUExecutionProvider'] if cuda else ['CPUExecutionProvider']
+    session = onnxruntime.InferenceSession(opt.yolov7_onnx_path, providers=providers)
+    IN_IMAGE_H = session.get_inputs()[0].shape[2]
+    IN_IMAGE_W = session.get_inputs()[0].shape[3]
+    new_shape = (IN_IMAGE_W, IN_IMAGE_H)
+    
+    # midas
+    midas_onnx_model = onnxruntime.InferenceSession(opt.midas_onnx_path)
+    return session, new_shape, midas_onnx_model
+    
+    
+def precise_dist(ob_output, px, py, title="Depth in unit: "):
+    cv2.putText(ob_output, title + str(5)+'[M]', (px, py-50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
     return ob_output
     
 def main(opt):
     # obdetect
-    per_frames = opt.per_frames
     conf_thres = opt.conf_thres
     cuda = False if opt.cpu=='True' else True
     providers = ['CUDAExecutionProvider', 'CPUExecutionProvider'] if cuda else ['CPUExecutionProvider']
@@ -64,12 +75,13 @@ def main(opt):
     out_format.release()
     cap.release()
     
+    
+"""
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--yolov7_onnx_path', type=str, default='weights/yolov7Tiny_640_640.onnx', help='image path')
     parser.add_argument('--midas_onnx_path', type=str, default='weights/model-f6b98070.onnx', help='onnx midas weight model')
     parser.add_argument('--cpu', type=str, default='True', help='if cpu is None, use CUDA')
-    parser.add_argument('--per_frames', type=int, default=5, help='num frames to predict at each thread for reducing device burden')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='conf threshold for NMS or postprocess')
     parser.add_argument('--vid_path', type=str, default='data/outdriving.mov', help='right video path')
     parser.add_argument('-o', '--output_file', type=str, default='data/movie', help='movie output path')
@@ -80,3 +92,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         sys.exit(1)
         raise
+"""
