@@ -33,6 +33,7 @@ DipthRatio = \boldsymbol{D(x,y)} : (D=DepthMap)
 ```
 ```math
 {c_x}={criteria_x}
+
 {c_y}={criteria_y}
 ```
 
