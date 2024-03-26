@@ -30,15 +30,15 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 
 
 
-<b>Sample driving movie</b>
-- [sample driving movie](https://drive.google.com/file/d/18P0mS9fjMD1nq2tKMzD-u_eXjpjttJ4n/view?usp=sharing)
-
 
   
 
-<b>Inference GIF</b>
+## Inference GIF
 
 <img src="https://github.com/madara-tribe/Qt6-MiDaS-depth-calculater/assets/48679574/0143b8eb-464a-4d92-8e27-d37a9bc0ec58" width="600px">
+
+<b>Sample driving movie</b>
+- [sample driving movie](https://drive.google.com/file/d/18P0mS9fjMD1nq2tKMzD-u_eXjpjttJ4n/view?usp=sharing)
 
 
 # References
