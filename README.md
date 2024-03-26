@@ -40,7 +40,7 @@ DipthRatio = \boldsymbol{D(x,y)} \hspace{2cm} (D=DepthMap)
 ```
 
 ```math
-{T_d} = \frac{{R_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
+(Formula)\hspace{5cm}{T_d} = \frac{{R_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
 ```
 
   
