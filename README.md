@@ -29,7 +29,7 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 # 3D distance calcurate formula 
 
 ```math
-DipthRatio = \boldsymbol{D(x,y)} : (D=DepthMap)
+DipthRatio = \boldsymbol{D(x,y)} \hspace{2cm} (D=DepthMap)
 ```
 ```math
 {c_x}={criteria_x},\hspace{2cm}{c_y}={criteria_y},\hspace{2cm}{R_d}=RealDistance
