@@ -29,7 +29,7 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 # 3D distance calcurate formula 
 
 ```math
-{t_d} = {L_c} \times \boldsymbol{D(x,y)}
+{t_d} = {\frac{{L_c} \times \overrightarrow{D(x,y)}}}
 ```
 
   
