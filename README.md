@@ -1,4 +1,4 @@
-# Simurate Jetson ONNX 3dDepth Calcurator advanced
+# Simulate Jetson ONNX 3dDepth Calcurator advanced
 
 Use onnx yolov7-tiny and midas-onnx model to calcurate 3d depth distance with camera on Qt6.
 
