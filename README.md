@@ -11,6 +11,11 @@ It simurate to estimate distances as car driving camera depth estimate system.
 
 ## area to estimate distance in this movie 
 
+you can not adapt this calcuration to <b>「Out of area」</b>
+
+<img src="https://github.com/madara-tribe/Qt6-MiDaS-depth-calculater/assets/48679574/4d0b30f1-246a-4e44-93f1-f536951ccbde" width="600px" height="300px">
+
+
 
 ## 3D distance calcurate formula 
 
