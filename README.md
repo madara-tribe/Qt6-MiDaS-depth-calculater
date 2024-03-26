@@ -12,7 +12,7 @@ previous classic style system is [here](https://github.com/madara-tribe/Qt6-clas
 
 This time system get more advanced and presize calcuration 
 
-<b>avarage inference time (midas + yolov7)</b>
+<b>avarage inference time (midas + yolov7) on CPU</b>
 ```txt
 760.16 [ms]
 ```
