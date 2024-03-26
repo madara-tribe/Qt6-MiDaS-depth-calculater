@@ -3,7 +3,11 @@
 Use onnx yolov7-tiny and midas-onnx model to calcurate 3d depth distance with camera on Qt6.
 It simurate to estimate distances as car driving camera depth estimate system.
 
-<b>avarage inference time</b>
+<b>avarage inference time (midas + yolov7)</b>
+```txt
+760.16 [ms]
+```
+
 
 ## area to estimate distance in this movie 
 
