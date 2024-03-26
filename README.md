@@ -28,8 +28,9 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 
 # 3D distance calcurate formula 
 
+```math
 {t_dist}
-
+```
 
   
 
