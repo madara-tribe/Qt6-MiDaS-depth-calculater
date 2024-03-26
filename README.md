@@ -32,15 +32,15 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 DipthRatio = \boldsymbol{D(x,y)} : (D=DepthMap)
 ```
 ```math
-{c_x}={criteria_x},  {c_y}={criteria_y},  {L_d}=RealDistance
+{c_x}={criteria_x},\hspace{2cm}{c_y}={criteria_y},\hspace{2cm}{R_d}=RealDistance
 ```
 
 ```math
-{t_x}={target_x}, {t_y}={target_y},  {t_d}=TargetDistance
+{t_x}={target_x},    {t_y}={target_y},      {T_d}=TargetDistance
 ```
 
 ```math
-{t_d} = \frac{{L_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
+{T_d} = \frac{{R_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
 ```
 
   
