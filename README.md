@@ -36,7 +36,7 @@ DipthRatio = \boldsymbol{D(x,y)} : (D=DepthMap)
 ```
 
 ```math
-{t_x}={target_x},    {t_y}={target_y},      {T_d}=TargetDistance
+{t_x}={target_x},\hspace{2cm}{t_y}={target_y},\hspace{2cm}{T_d}=TargetDistance
 ```
 
 ```math
