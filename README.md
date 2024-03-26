@@ -18,7 +18,7 @@ This time system get more advanced and presize calcuration
 ```
 
 
-## area to estimate distance in this movie 
+# area to estimate distance in this movie 
 
 you can not adapt this calcuration system to <b>「Out of area」</b>
 
@@ -26,14 +26,14 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 
 
 
-## 3D distance calcurate formula 
+# 3D distance calcurate formula 
 
 
 
 
   
 
-## Inference GIF
+# Inference GIF
 
 <img src="https://github.com/madara-tribe/Qt6-MiDaS-depth-calculater/assets/48679574/0143b8eb-464a-4d92-8e27-d37a9bc0ec58" width="600px">
 
