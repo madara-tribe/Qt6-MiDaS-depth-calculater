@@ -30,7 +30,7 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 
 ```math
 \begin{array}
-\bigl({c_x}={criteria_x}\hspace{0.5cm}{c_y}={criteria_y}\hspace{0.5cm}{R_d}=RealDistance)\\
+\bigl({c_x}={criteria_x}\hspace{0.5cm}{c_y}={criteria_y}\hspace{0.5cm}{C_d}=CriteriaDistance)\\
 \bigl({t_x}={target_x}\hspace{0.5cm}{t_y}={target_y}\hspace{0.5cm}{T_d}=TargetDistance)\\
 \bigl(D=DepthMap)
 \end{array}
@@ -41,7 +41,7 @@ DipthRatio = \boldsymbol{D(x,y)} \hspace{2cm}
 ```
 
 ```math
-(Formula)\hspace{5cm}{T_d} = \frac{{R_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
+(Formula)\hspace{5cm}{T_d} = \frac{{C_d} \times \boldsymbol{D({t_x},{t_y})}}{\boldsymbol{D({c_x}, {c_y})}}
 ```
 
   
