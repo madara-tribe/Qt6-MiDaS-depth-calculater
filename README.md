@@ -29,11 +29,9 @@ you can not adapt this calcuration system to <b>「Out of area」</b>
 # 3D distance calcurate formula 
 
 ```math
-dipth_ratio = \boldsymbol{D(x,y)}  
+DipthRatio = \boldsymbol{D(x,y)}  (D=DepthMap)
 ```
-```math
-D=DepthMap,   
-```
+
 
 
 ```math
